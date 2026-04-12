@@ -24,6 +24,7 @@ export BUILD="$BASE/build"
 export BIN="$BASE/bin"
 export SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 export LD_RUN_PATH='$ORIGIN'
+export LD_LIBRARY_PATH="$BUILD/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
 export ACLOCAL_PATH=/usr/share/aclocal
 export LIBXML2_INCLUDE_DIRS="$BUILD/include/libxml2"
 export LIBXML2_LIBRARIES="$BUILD/lib/libxml2.so"
@@ -57,7 +58,7 @@ for venv in "${venvs[@]}"; do
 
   pip install build auditwheel patchelf
   cd "$PROJECT_DIR"
-  python -m build
+  python -m build --sdist --wheel
 
   wheel=$(ls -1 dist/*${venv:2}*)
   echo $wheel
