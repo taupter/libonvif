@@ -34,7 +34,6 @@ export SOURCE="$BASE/source"
 export BUILD="$BASE/build"
 export LIBXML2_INCLUDE_DIRS="$BUILD/include/libxml2"
 export LIBXML2_LIBRARIES="$BUILD/lib/libxml2.dylib"
-export SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
 mkdir -p "$SOURCE"
 echo "Starting LIBXML2 build" >&2

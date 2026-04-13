@@ -3295,14 +3295,14 @@ git clone --recursive https://github.com/sr99622/libonvif
 cd libonvif
 git switch dev
 cd ..
-libonvif/libonvif/scripts/mac/mac_build libonvif/libonvif
+libonvif/libonvif/scripts/mac/mac_build
 ```
-You can find the package installers in the $HOME/libonvif/dist directory. To quick test:
+You can find the package installers in the $HOME/libonvif/libonvif/fixed_wheels directory. To quick test:
 
 ```
 . $HOME/py313/bin/activate
 pip list
-pip install $HOME/libonvif/dist/*313*
+pip install $HOME/libonvif/libonvif/fixed_wheels/*313*
 python
 >>> import libonvif
 >>> libonvif.__version__
