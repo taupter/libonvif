@@ -1,6 +1,5 @@
-echo "Delete system python from host machine before compiling, otherwise linking will not work"
-
 @echo off
+echo "Delete system python from host machine before compiling, otherwise linking will not work"
 
 if not exist "%ALLUSERSPROFILE%\chocolatey\bin\" (
     @"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "[System.Net.ServicePointManager]::SecurityProtocol = 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
@@ -22,10 +21,6 @@ if not exist onvif-gui-win-libs\ (
 
 cd %HOMEPATH%\libonvif
 
-if exist dist\ (
-    del /q dist\*
-)
-
 call libonvif\scripts\windows\python\install
 call libonvif\scripts\windows\env_variables
 call libonvif\scripts\windows\copy_libs
@@ -35,9 +30,11 @@ for %%v in %list% do (
     cd %HOMEPATH%
     %LOCALAPPDATA%\Programs\Python\Python%%v\python -m venv py%%v
     call py%%v\Scripts\activate
-    python.exe -m pip install --upgrade pip
-    pip uninstall -y libonvif
-    cd libonvif
-    call libonvif\scripts\windows\build_pkgs
+    python -m pip install --upgrade pip
+
+    pip install build delvewheel
+    cd libonvif\libonvif
+    python -m build --sdist --wheel
+    delvewheel repair dist\*cp%%v-cp%%v-*.whl --add-path libonvif
     call deactivate
 )
