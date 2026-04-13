@@ -3241,7 +3241,7 @@ ls
 
 <h3>Linux</h3>
 
-Use for both x86_64 and aarch64. Start the docker container and cd to $HOME, it won't work from /. The command line requires the location of the project directory. Substitute the `<arch>` tag for your platform.
+Use for both x86_64 and aarch64. Start the docker container and cd to $HOME, it won't work from /. Substitute the `<arch>` tag for your platform.
 
 Docker configuration
 
@@ -3263,7 +3263,7 @@ From inside the container, run the build
 ```
 cd $HOME
 git clone --recursive https://github.com/sr99622/libonvif
-libonvif/libonvif/scripts/linux/linux_build libonvif/libonvif
+libonvif/libonvif/scripts/linux/linux_build
 ```
 
 The package installers will be found in the libonvif/libonvif/wheelhouse directory. For a quick test:
